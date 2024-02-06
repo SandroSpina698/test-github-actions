@@ -42,10 +42,23 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Build and push db image
+        uses: docker/build-push-action@v3
+        with:
+          context: ./tp1  # Chemin vers le dossier contenant le Dockerfile du backend
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-db:latest
+          push: ${{ github.ref == 'refs/heads/main' }}  # Pousse l'image seulement si le commit est sur la branche main
+        
+      - name: Build and push httpd image
+        uses: docker/build-push-action@v3
+        with:
+          context: ./tp1/api/httpserver  # Chemin vers le dossier contenant le Dockerfile du backend
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-httpd:latest
+          push: ${{ github.ref == 'refs/heads/main' }}
+
       - name: Build and push backend image
         uses: docker/build-push-action@v3
         with:
-          context: ./simple-api-student-main  # Chemin vers le dossier contenant le Dockerfile du backend
+          context: ./tp1/api  # Chemin vers le dossier contenant le Dockerfile du backend
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api:latest
-          push: ${{ github.ref == 'refs/heads/main' }}  # Pousse l'image seulement si le commit est sur la branche main
-        
+          push: ${{ github.ref == 'refs/heads/main' }}
