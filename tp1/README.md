@@ -56,3 +56,9 @@ ENTRYPOINT java -jar myapp.jar # le jar qui a été généré par le maven packa
 ```
 
 On a besoin d'un multistage build car cela permet d'optimiser les ressources
+
+### ayant été absent le premier jour, je n'ai pas eu à continuer le tp01
+
+### Question 2 - 1
+
+Les testcontainers: Il s'agit d'une technologie permettant de créer des environnements de test isolés et reproductibles pour les applications. ça peut être utilisé pour lancer une instance d'une base d données 
