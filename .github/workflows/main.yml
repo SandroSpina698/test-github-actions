@@ -20,6 +20,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+      
+      - name: Get into spring project
+        run: cd tp1/api/simple-api-student-main
 
       - name: Build and test with Maven
         run: mvn clean verify
