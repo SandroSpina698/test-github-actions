@@ -22,6 +22,9 @@ jobs:
           distribution: 'adopt'
       
       - name: Get into spring project
+        run: cd tp1/api/simple-api-student-main
+
+      - name: Get into spring project
         run: ls -l
 
       - name: Build and test with Maven
