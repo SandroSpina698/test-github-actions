@@ -1,0 +1,8 @@
+- name: Run front
+  docker_container:
+    name: front
+    image: sspina69/tp-front:latest
+    networks: 
+      - name: app-network
+    ports: 
+      - 80:80

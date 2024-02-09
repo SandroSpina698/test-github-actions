@@ -56,6 +56,13 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-httpd:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
+      - name: Build and push front image
+        uses: docker/build-push-action@v3
+        with:
+          context: ../devops-front  # Chemin vers le dossier contenant le Dockerfile du front
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-front:latest
+          push: ${{ github.ref == 'refs/heads/main' }}
+
       - name: Build and push backend image
         uses: docker/build-push-action@v3
         with:

@@ -1,0 +1,13 @@
+- hosts: all
+  gather_facts: false
+  become: true
+  vars_files:
+    - secret.yml
+  roles:
+    - docker
+    - create-network
+    - backend
+    - proxy
+    - db
+    - front
+

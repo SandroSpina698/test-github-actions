@@ -62,3 +62,74 @@ On a besoin d'un multistage build car cela permet d'optimiser les ressources
 ### Question 2 - 1
 
 Les testcontainers: Il s'agit d'une technologie permettant de créer des environnements de test isolés et reproductibles pour les applications. ça peut être utilisé pour lancer une instance d'une base d données 
+
+
+## ANSIBLE
+
+### Question 3 - 1
+
+voici l'inventory du setup.yml: 
+
+```
+all:
+ vars:
+   ansible_user: centos
+   ansible_ssh_private_key_file: /path/to/private/key
+ children:
+   prod:
+     hosts: hostname or IP
+```
+Rien ne change pour l'instant par rapport à celui qui est dans l'énoncé. 
+
+### Question 3 - 2
+
+playbook
+
+```
+- hosts: all
+  gather_facts: false # stipule que pour l'instant nous n'utilisons pas les variable d'environnement d'ansible
+  become: true # devient un super user
+  roles:
+	- docker # role docker ou je fais les installations nécessaires. 
+```
+
+Dans roles/docker/tasks/main.yml: 
+```
+# Install Docker
+  #tasks:
+
+  - name: Install device-mapper-persistent-data
+    yum:
+      name: device-mapper-persistent-data
+      state: latest
+
+  - name: Install lvm2
+    yum:
+      name: lvm2
+      state: latest
+
+  - name: add repo docker
+    command:
+      cmd: sudo yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+
+  - name: Install Docker
+    yum:
+      name: docker-ce
+      state: present
+
+  - name: Install python3
+    yum:
+      name: python3
+      state: present
+
+  - name: Install docker with Python 3
+    pip:
+      name: docker
+      executable: pip3
+    vars:
+      ansible_python_interpreter: /usr/bin/python3
+
+  - name: Make sure Docker is running
+    service: name=docker state=started
+    tags: docker
+```

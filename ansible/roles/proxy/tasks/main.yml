@@ -1,0 +1,9 @@
+- name: Run HTTPD
+  docker_container:
+    name: httpd
+    image: sspina69/tp-devops-simple-httpd:latest
+    networks: 
+      - name: app-network
+    ports : 
+      - 8080:80
+

@@ -1,0 +1,6 @@
+- name: Run db
+  docker_container:
+    name: "{{ DB_HOST }}"
+    image: sspina69/tp-devops-simple-db:latest
+    networks: 
+      - name: app-network

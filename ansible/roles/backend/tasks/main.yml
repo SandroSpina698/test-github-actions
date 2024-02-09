@@ -1,0 +1,11 @@
+- name: Run backend
+  docker_container:
+    name: api
+    image: sspina69/tp-devops-simple-api
+    networks: 
+      - name: app-network
+    env:
+      DB_HOST: "{{ DB_HOST }}"
+      DB_NAME: "{{ DB_NAME }}"
+      DB_USERNAME: "{{ DB_USERNAME }}"
+      DB_PWD: "{{ DB_PWD }}"
